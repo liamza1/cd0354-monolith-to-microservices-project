@@ -1,0 +1,36 @@
+branches:
+  only:
+    - master
+    - dev
+
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts to be run such as tests
+before_script:
+  - echo "no tests"
+
+script:
+  - docker build -t reverseproxy:latest -f udagram-reverseproxy/Dockerfile reverse-proxy/
+  - docker tag reverseproxy:latest liamza19/reverseproxy:latest
+  - docker build -t udagram-frontend:latest -f udagram-frontend/Dockerfile udagram-frontend/
+  - docker tag udagram-frontend:latest liamza19/udagram-frontend:latest
+  - docker build -t udagram-user-microservice:latest -f udagram-api-user/Dockerfile udagram-api-user/
+  - docker tag udagram-user-microservice:latest liamza19/udagram-api-user:latest
+  - docker build -t udagram-feed-microservice:latest -f udagram-api-feed/Dockerfile udagram-api-feed/
+  - docker tag udagram-feed-microservice:latest liamza19/udagram-api-feed:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push  liamza19/reverseproxy:latest
+  - docker push  liamza19/udagram-frontend:latest
+  - docker push  liamza19/udagram-api-user:latest
+  - docker push  liamza19/udagram-api-feed:latest
