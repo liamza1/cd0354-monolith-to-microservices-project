@@ -14,13 +14,13 @@ before_script:
   - echo "no tests"
 
 script:
-  - docker build -t reverseproxy:latest -f ./udagram-reverseproxy
+  - docker build -t reverseproxy:latest ./udagram-reverseproxy
   - docker tag reverseproxy:latest liamza19/reverseproxy:latest
-  - docker build -t udagram-frontend:latest -f ./udagram-frontend
+  - docker build -t udagram-frontend:latest ./udagram-frontend
   - docker tag udagram-frontend:latest liamza19/udagram-frontend:latest
-  - docker build -t udagram-user-microservice:latest -f ./udagram-api-user
+  - docker build -t udagram-user-microservice:latest ./udagram-api-user
   - docker tag udagram-user-microservice:latest liamza19/udagram-api-user:latest
-  - docker build -t udagram-feed-microservice:latest -f ./udagram-api-feed
+  - docker build -t udagram-feed-microservice:latest ./udagram-api-feed
   - docker tag udagram-feed-microservice:latest liamza19/udagram-api-feed:latest
 
 after_success:
