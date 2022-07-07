@@ -19,7 +19,7 @@ before_script:
   - echo "no tests"
 
 script:
-  - docker build -t reverseproxy:latest -f udagram-reverseproxy/Dockerfile reverse-proxy/
+  - docker build -t reverseproxy:latest -f udagram-reverseproxy/Dockerfile reverseproxy/
   - docker tag reverseproxy:latest liamza19/reverseproxy:latest
   - docker build -t udagram-frontend:latest -f udagram-frontend/Dockerfile udagram-frontend/
   - docker tag udagram-frontend:latest liamza19/udagram-frontend:latest
