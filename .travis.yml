@@ -1,11 +1,10 @@
-branches:
-  only:
-    - master
-    - dev
-
 language: node_js
 node_js:
   - 13
+  
+branches:
+  only:
+    - master
 
 services:
   - docker
@@ -19,13 +18,13 @@ before_script:
   - echo "no tests"
 
 script:
-  - docker build -t reverseproxy:latest -f udagram-reverseproxy/Dockerfile reverseproxy/
+  - docker build -t reverseproxy:latest -f ./udagram-reverseproxy
   - docker tag reverseproxy:latest liamza19/reverseproxy:latest
-  - docker build -t udagram-frontend:latest -f udagram-frontend/Dockerfile udagram-frontend/
+  - docker build -t udagram-frontend:latest -f ./udagram-frontend
   - docker tag udagram-frontend:latest liamza19/udagram-frontend:latest
-  - docker build -t udagram-user-microservice:latest -f udagram-api-user/Dockerfile udagram-api-user/
+  - docker build -t udagram-user-microservice:latest -f ./udagram-api-user
   - docker tag udagram-user-microservice:latest liamza19/udagram-api-user:latest
-  - docker build -t udagram-feed-microservice:latest -f udagram-api-feed/Dockerfile udagram-api-feed/
+  - docker build -t udagram-feed-microservice:latest -f ./udagram-api-feed
   - docker tag udagram-feed-microservice:latest liamza19/udagram-api-feed:latest
 
 after_success:
