@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: monoproject-335347403854
+  AWS_PROFILE: eksOP
+  AWS_REGION: us-east-2
+  JWT_SECRET: testing
+  POSTGRES_DB: postgres
+  POSTGRES_HOST: mono-db.c8r8rkzne4xg.us-east-2.rds.amazonaws.com
+  URL: http://localhost:8100
+metadata:
+  name: env-config
